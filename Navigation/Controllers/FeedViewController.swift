@@ -11,7 +11,7 @@ class FeedViewController: UIViewController {
 
     var firstPost = Post(title: "Hello world!")
     
-    var postButton: UIButton = {
+    var postButtonOne: UIButton = {
         var button = UIButton()
         button.setTitle("New Post", for: .normal)
         button.backgroundColor = .systemIndigo
@@ -22,6 +22,29 @@ class FeedViewController: UIViewController {
         return button
     }()
     
+    var postButtonTwo: UIButton = {
+        var button = UIButton()
+        button.setTitle("New Post", for: .normal)
+        button.backgroundColor = .systemIndigo
+        button.layer.cornerRadius = 12
+        button.layer.borderColor = UIColor.yellow.cgColor
+        button.frame = CGRect(x: 0, y: 0, width: 220, height: 45)
+        button.addTarget(self, action: #selector(getNewPost), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var myStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(self.postButtonOne)
+        stack.addArrangedSubview(self.postButtonTwo)
+        return stack
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Your feed"
@@ -30,8 +53,15 @@ class FeedViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        postButton.center = view.center
-        view.addSubview(postButton)
+        view.addSubview(myStackView)
+        
+        NSLayoutConstraint.activate([
+            myStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            myStackView.heightAnchor.constraint(equalToConstant: view.frame.size.height/2),
+            myStackView.widthAnchor.constraint(equalToConstant: view.frame.size.width/2)
+        ])
+        
     }
     
     

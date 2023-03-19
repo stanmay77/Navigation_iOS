@@ -11,7 +11,7 @@ final class ProfileHeaderView: UIView {
     
     private var statusText: String?
     
-    let statusButton: UIButton = {
+    let setStatusButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.backgroundColor = .systemBlue
         button.setTitle("Show status", for: .normal)
@@ -26,7 +26,7 @@ final class ProfileHeaderView: UIView {
         return button
     }()
     
-    let nickNameLabel: UILabel = {
+    let fullNameLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.text = "Hipster Cat"
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
@@ -35,7 +35,7 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    let imageView: UIImageView = {
+    let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "cat"))
         
         imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
@@ -56,7 +56,7 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    let textField: UITextField = {
+    let statusTextField: UITextField = {
         let textField = UITextField(frame: CGRect(x:10, y:10, width: 100, height: 35))
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -67,7 +67,7 @@ final class ProfileHeaderView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         textField.setLeftPaddingPoints(10)
-        textField.text = "Enter status..."
+        textField.placeholder = "Enter status..."
         return textField
     }()
     
@@ -82,42 +82,42 @@ final class ProfileHeaderView: UIView {
     }
     
     func configureUI() {
-        self.addSubview(statusButton)
-        self.addSubview(nickNameLabel)
-        self.addSubview(imageView)
+        self.addSubview(setStatusButton)
+        self.addSubview(fullNameLabel)
+        self.addSubview(avatarImageView)
         self.addSubview(statusLabel)
-        self.addSubview(textField)
+        self.addSubview(statusTextField)
         
 
         NSLayoutConstraint.activate([
-            imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            imageView.widthAnchor.constraint(equalToConstant: 100),
-            imageView.heightAnchor.constraint(equalToConstant: 100),
+            avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
         ])
         
         NSLayoutConstraint.activate([
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
-            statusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            statusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            statusButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16)
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            setStatusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16)
         ])
         
         NSLayoutConstraint.activate([
-            nickNameLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 40),
-            nickNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27)
+            fullNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40),
+            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27)
         ])
         
         NSLayoutConstraint.activate([
-            statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -50),
-            statusLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 40)
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -50),
+            statusLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40)
         ])
         
         NSLayoutConstraint.activate([
-            textField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -10),
-            textField.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 40),
-            textField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            textField.heightAnchor.constraint(equalToConstant: 35)
+            statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -10),
+            statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40),
+            statusTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 35)
         ])
         
     
