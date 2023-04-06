@@ -19,7 +19,7 @@ class TabBarVC: UITabBarController {
     func setupUI() {
         
         let feedNavVC = UINavigationController(rootViewController: FeedViewController())
-        let profileNavVC = UINavigationController(rootViewController: ProfileViewController())
+        let profileNavVC = UINavigationController(rootViewController: LogInViewController())
         
         feedNavVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "square.and.pencil.circle"), tag: 0)
         profileNavVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 0)

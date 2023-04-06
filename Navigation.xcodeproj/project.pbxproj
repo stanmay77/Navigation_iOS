@@ -14,6 +14,7 @@
 		330373E229B3C73500C65FA4 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373E129B3C73500C65FA4 /* TabBarVC.swift */; };
 		330373E429B3C78000C65FA4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373E329B3C78000C65FA4 /* FeedViewController.swift */; };
 		330373E829B3C7A800C65FA4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373E729B3C7A800C65FA4 /* PostViewController.swift */; };
+		3324CC6229D8544A00B10223 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324CC6129D8544A00B10223 /* LogInViewController.swift */; };
 		336E7A8C29BA2E2800A61E27 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E7A8B29BA2E2800A61E27 /* ProfileHeaderView.swift */; };
 		336E7A8E29BA306700A61E27 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E7A8D29BA306700A61E27 /* ProfileViewController.swift */; };
 		33B0799629C0D57100C1D22E /* cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33B0799529C0D57100C1D22E /* cat.jpg */; };
@@ -32,6 +33,7 @@
 		330373E129B3C73500C65FA4 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		330373E329B3C78000C65FA4 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		330373E729B3C7A800C65FA4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		3324CC6129D8544A00B10223 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		336E7A8B29BA2E2800A61E27 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		336E7A8D29BA306700A61E27 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		33B0799529C0D57100C1D22E /* cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat.jpg; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				336E7A8B29BA2E2800A61E27 /* ProfileHeaderView.swift */,
 				336E7A8D29BA306700A61E27 /* ProfileViewController.swift */,
+				3324CC6129D8544A00B10223 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				330373E829B3C7A800C65FA4 /* PostViewController.swift in Sources */,
 				336E7A8E29BA306700A61E27 /* ProfileViewController.swift in Sources */,
+				3324CC6229D8544A00B10223 /* LogInViewController.swift in Sources */,
 				330373CD29B3BD7F00C65FA4 /* AppDelegate.swift in Sources */,
 				330373E429B3C78000C65FA4 /* FeedViewController.swift in Sources */,
 				336E7A8C29BA2E2800A61E27 /* ProfileHeaderView.swift in Sources */,

@@ -94,26 +94,18 @@ final class ProfileHeaderView: UIView {
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
             avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-        ])
-        
-        NSLayoutConstraint.activate([
+            
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             setStatusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             setStatusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16)
-        ])
-        
-        NSLayoutConstraint.activate([
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            
             fullNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40),
-            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27)
-        ])
+            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
         
-        NSLayoutConstraint.activate([
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -50),
-            statusLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40)
-        ])
+            statusLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40),
         
-        NSLayoutConstraint.activate([
             statusTextField.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -10),
             statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 40),
             statusTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),

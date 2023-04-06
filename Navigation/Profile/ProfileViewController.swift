@@ -36,6 +36,14 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         title = "Profile"
+        configureUI()
+    }
+    
+    @objc func newButtonPressed() {
+        
+    }
+    
+    func configureUI() {
         view.addSubview(headerView)
         view.addSubview(newButton)
         
@@ -48,10 +56,6 @@ class ProfileViewController: UIViewController {
             newButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
-    }
-    
-    @objc func newButtonPressed() {
-        
     }
     
     
