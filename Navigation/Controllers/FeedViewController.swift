@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    var firstPost = Post(title: "Hello world!")
+    var firstPost = Post(title: "Hello world!", author: "", description: "", image: "", likes: 0, views: 0)
     
     var postButtonOne: UIButton = {
         var button = UIButton()
