@@ -1,6 +1,6 @@
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+final class PostTableViewCell: UITableViewCell {
     
     lazy var postHeaderLabel: UILabel = {
         let label = UILabel()
@@ -79,12 +79,12 @@ class PostTableViewCell: UITableViewCell {
                 postTextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
                 
                 likesLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-                likesLabel.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor),
-                likesLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+                likesLabel.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor, constant: Constants.likesViewsTopConstraint),
+                likesLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.likesViewsBottomConstraint),
 
                 viewsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-                viewsLabel.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor),
-                viewsLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+                viewsLabel.topAnchor.constraint(equalTo: postTextLabel.bottomAnchor, constant: Constants.likesViewsTopConstraint),
+                viewsLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.likesViewsBottomConstraint)
             ])
     }
     

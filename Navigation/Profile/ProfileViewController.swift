@@ -9,18 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    //Defining Posts data
-    
-    private let posts:[Post] = [
-    Post(title: "OpenAI announces ChatGPT successor GPT-4", author: "Mad Daymon", description: "The new model can respond to images - providing recipe suggestions from photos of ingredients, for example, as well as writing captions and descriptions", image: "gpt4", likes: 569, views: 1000),
-    Post(title: "Apple WWDC 2023: Dates Confirmed, Countdown Begins", author: "Tim Cook", description: "Apple today announced it will host its annual Worldwide Developers Conference (WWDC) in an online format from June 5 through 9, 2023", image: "wwdc", likes: 567394, views: 657888),
-    Post(title: "Google reveals its newest A.I. supercomputer, says it beats Nvidia", author: "Sergey Brin", description: "Google published details about its AI supercomputer on Wednesday, saying it is faster and more efficient than competing Nvidia systems.", image: "ggo", likes: 890999, views: 2359856),
-    Post(title: "OneNote is getting Microsoft’s new AI Copilot to help you write your notes", author: "Bill Gates", description: "Copilot in OneNote can rewrite, format, or summarize your existing notes and help you create plans and more", image: "msft", likes: 12333, views: 76580)
-    ]
-    
     let postsTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.reuseIdentifier)
+        table.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.reuseIdentifier)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.estimatedRowHeight = 850
         table.rowHeight = UITableView.automaticDimension
@@ -34,13 +26,14 @@ class ProfileViewController: UIViewController {
         configureUI()
     }
     
-    @objc func newButtonPressed() {
-        
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
     
     func configureUI() {
         
         navigationItem.hidesBackButton = true
+        
         postsTable.delegate = self
         postsTable.dataSource = self
         
@@ -58,19 +51,29 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
-
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        if section == 0 {
+            return 1
+        }
+        else {
+            return Post.posts.count
+            }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath) as? PostTableViewCell else { return UITableViewCell()}
-        cell.configure(for: posts[indexPath.row])
-        return cell
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.reuseIdentifier, for: indexPath) as? PhotosTableViewCell else { return UITableViewCell() }
+            return cell
+        }
+        else  {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath) as? PostTableViewCell else { return UITableViewCell()}
+            cell.configure(for: Post.posts[indexPath.row])
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -78,16 +81,44 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         {
             return ProfileHeaderView()
         }
-        else {
+        else
+        {
             return UIView()
         }
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
+        if section == 0 {
+            return 200
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return (view.frame.size.width - 48) / 4 + 50
+        }
+        else
+        {
+            return tableView.rowHeight
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let vc = PhotosViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        else {
+            return
+        }
     }
 }
 
