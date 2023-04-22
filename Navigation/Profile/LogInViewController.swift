@@ -16,7 +16,7 @@ class LogInViewController: UIViewController {
         return image
     }()
     
-    var logInButton: UIButton = {
+    lazy var logInButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)

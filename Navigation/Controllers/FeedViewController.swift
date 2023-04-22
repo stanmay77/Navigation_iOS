@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
 
     var firstPost = Post(title: "Hello world!", author: "", description: "", image: "", likes: 0, views: 0)
     
-    var postButtonOne: UIButton = {
+    lazy var postButtonOne: UIButton = {
         var button = UIButton()
         button.setTitle("New Post", for: .normal)
         button.backgroundColor = .systemIndigo
@@ -22,7 +23,7 @@ class FeedViewController: UIViewController {
         return button
     }()
     
-    var postButtonTwo: UIButton = {
+    lazy var postButtonTwo: UIButton = {
         var button = UIButton()
         button.setTitle("New Post", for: .normal)
         button.backgroundColor = .systemIndigo

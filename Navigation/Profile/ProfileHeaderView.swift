@@ -11,7 +11,7 @@ final class ProfileHeaderView: UIView {
     
     private var statusText: String?
     
-    let setStatusButton: UIButton = {
+    lazy var setStatusButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.backgroundColor = .systemBlue
         button.setTitle("Show status", for: .normal)
@@ -35,7 +35,7 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    let avatarImageView: UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "cat"))
         
         imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
@@ -44,6 +44,10 @@ final class ProfileHeaderView: UIView {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 3
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        
+        let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+        imageView.addGestureRecognizer(tapAvatar)
         return imageView
     }()
     
@@ -124,6 +128,12 @@ final class ProfileHeaderView: UIView {
     @objc func statusTextChanged(_ textField: UITextField) {
         self.statusText = textField.text ?? ""
     }
+      
+    @objc func tapImage() {
+
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) { [self] in
+           avatarImageView.center = superview?.center ?? center
+        }
+    }
     
-    
-}
+    }

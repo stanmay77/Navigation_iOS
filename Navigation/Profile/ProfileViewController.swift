@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -34,6 +35,12 @@ class ProfileViewController: UIViewController {
         
         navigationItem.hidesBackButton = true
         
+        #if DEBUG
+        view.backgroundColor = .blue
+        #else
+        view.backgroundColor = .red
+        #endif
+        
         postsTable.delegate = self
         postsTable.dataSource = self
         
@@ -46,6 +53,7 @@ class ProfileViewController: UIViewController {
                 postsTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 postsTable.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
+        
         
     }
         

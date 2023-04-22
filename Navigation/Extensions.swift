@@ -25,7 +25,7 @@ extension UIImage {
     
     func image(alpha: Double) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
-                draw(at: .zero, blendMode: .normal, alpha: alpha)
+        draw(at: .zero, blendMode: .normal, alpha: alpha)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
