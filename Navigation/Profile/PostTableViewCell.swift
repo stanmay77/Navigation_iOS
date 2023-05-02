@@ -1,5 +1,6 @@
 import UIKit
 import StorageService
+import iOSIntPackage
 
 final class PostTableViewCell: UITableViewCell {
     
@@ -91,7 +92,20 @@ final class PostTableViewCell: UITableViewCell {
     
     func configure(for post:Post) {
         postHeaderLabel.text = post.title
-        postImageView.image = UIImage(named: post.image)
+        
+        //guard let postImage = UIImage(named: post.image) else { return }
+        
+        var imProcessor = ImageProcessor()
+        
+        imProcessor.processImage(sourceImage: UIImage(named: post.image)!, filter: .sepia(intensity: 5.0)) { image in
+            guard let image = image else {
+                return
+            }
+            
+            postImageView.image = image
+                
+        }
+        
         postTextLabel.text = post.description
         likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
