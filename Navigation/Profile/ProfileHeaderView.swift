@@ -29,7 +29,6 @@ final class ProfileHeaderView: UIView {
     
     let fullNameLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "Hipster Cat"
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +36,7 @@ final class ProfileHeaderView: UIView {
     }()
     
     lazy var avatarImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "cat"))
+        let imageView = UIImageView()
         
         imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -54,7 +53,6 @@ final class ProfileHeaderView: UIView {
     
     let statusLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "Waiting for something..."
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false

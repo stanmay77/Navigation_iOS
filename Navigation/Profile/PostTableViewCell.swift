@@ -95,16 +95,9 @@ final class PostTableViewCell: UITableViewCell {
         
         //guard let postImage = UIImage(named: post.image) else { return }
         
-        var imProcessor = ImageProcessor()
-        
-        imProcessor.processImage(sourceImage: UIImage(named: post.image)!, filter: .sepia(intensity: 5.0)) { image in
-            guard let image = image else {
-                return
-            }
-            
-            postImageView.image = image
-                
-        }
+        ImageProcessor().processImage(sourceImage: UIImage(named: post.image)!, filter: .sepia(intensity: 5.0)) { image in
+                   postImageView.image = image
+               }
         
         postTextLabel.text = post.description
         likesLabel.text = "Likes: \(post.likes)"

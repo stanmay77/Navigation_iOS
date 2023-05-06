@@ -8,7 +8,9 @@
 import UIKit
 
 class LogInViewController: UIViewController {
-
+    
+    var currentUserService: UserService? = nil
+    
     var logoImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -196,9 +198,30 @@ class LogInViewController: UIViewController {
     }
 
     @objc func goToProfile() {
-        let pvc = ProfileViewController()
-        navigationController?.navigationBar.isHidden = false
-        self.show(pvc, sender: self)
+        
+        let loginEntered = logInTextField.text ?? ""
+        
+        #if DEBUG
+        currentUserService = TestUserService()
+        #else
+        currentUserService = CurrentUserService()
+        #endif
+        
+        let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
+        
+        if checkedUser != nil {
+            let pvc = ProfileViewController()
+            navigationController?.navigationBar.isHidden = false
+            self.show(pvc, sender: self)
+            pvc.userLogged = checkedUser
+        } else {
+            let alertVC = UIAlertController(title: "Error", message: "User with login \(logInTextField.text ?? "") not registered!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default)
+            alertVC.addAction(alertAction)
+            present(alertVC, animated: true)
+            
+        }
+        
     }
     
     
@@ -224,6 +247,8 @@ class LogInViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
+    
+
     
 }
 

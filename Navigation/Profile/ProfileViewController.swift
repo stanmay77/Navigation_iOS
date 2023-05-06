@@ -10,6 +10,8 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
+    var userLogged: User? = nil
+    
     let postsTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.reuseIdentifier)
@@ -87,7 +89,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0
         {
-            return ProfileHeaderView()
+            let profileVC = ProfileHeaderView()
+            profileVC.fullNameLabel.text = userLogged?.fullName ?? "No Name"
+            profileVC.avatarImageView.image = userLogged?.avatar ?? UIImage(named: "cat")
+            profileVC.statusLabel.text = userLogged?.status ?? "No status provided"
+            return profileVC
         }
         else
         {
