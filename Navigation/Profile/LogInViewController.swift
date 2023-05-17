@@ -11,6 +11,8 @@ class LogInViewController: UIViewController {
     
     var currentUserService: UserService? = nil
     
+    var delegate: LoginViewControllerDelegate?
+    
     var logoImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -199,7 +201,6 @@ class LogInViewController: UIViewController {
 
     @objc func goToProfile() {
         
-        let loginEntered = logInTextField.text ?? ""
         
         #if DEBUG
         currentUserService = TestUserService()
@@ -207,23 +208,23 @@ class LogInViewController: UIViewController {
         currentUserService = CurrentUserService()
         #endif
         
+        let loginEntered = logInTextField.text ?? ""
+        let passwordEntered = passwordTextField.text ?? ""
+        let loginConfirmed = delegate?.check(loginEntered, passwordEntered) ?? false
         let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
         
-        if checkedUser != nil {
+        if loginConfirmed && checkedUser != nil {
             let pvc = ProfileViewController()
             navigationController?.navigationBar.isHidden = false
             self.show(pvc, sender: self)
             pvc.userLogged = checkedUser
         } else {
-            let alertVC = UIAlertController(title: "Error", message: "User with login \(logInTextField.text ?? "") not registered!", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default)
             alertVC.addAction(alertAction)
             present(alertVC, animated: true)
-            
         }
-        
     }
-    
     
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
