@@ -37,7 +37,7 @@ class CurrentUserService: UserService {
 
 class TestUserService: UserService {
     
-    let userLogged = User(login: "test", fullName: "Test User", avatar: UIImage(systemName: "phone.down.circle"), status: "test")
+    let userLogged = User(login: "tim@apple.com", fullName: "Test User", avatar: UIImage(systemName: "phone.down.circle"), status: "test")
    
     func getUserByLogin(for login: String?) -> User? {
         guard let login = login else { return nil }
