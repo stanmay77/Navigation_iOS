@@ -54,7 +54,8 @@ class LogInViewController: UIViewController {
     
     lazy var logInTextField: UITextField = {
         let tField = UITextField(frame: .zero)
-        tField.placeholder = "Email or phone"
+        tField.text = "tim@apple.com"
+        tField.placeholder = "Email or user name"
         tField.setLeftPaddingPoints(10)
         tField.textColor = .black
         tField.font = UIFont.systemFont(ofSize: 16)
@@ -72,6 +73,7 @@ class LogInViewController: UIViewController {
     
     lazy var passwordTextField: UITextField = {
         let tField = UITextField(frame: .zero)
+        tField.text = "tim"
         tField.placeholder = "Password"
         tField.setLeftPaddingPoints(10)
         tField.textColor = .black

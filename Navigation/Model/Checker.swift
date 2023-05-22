@@ -7,7 +7,7 @@ final class Checker {
     
     static let main = Checker()
     
-    private let login: String = "tim"
+    private let login: String = "tim@apple.com"
     private let password: String = "tim"
 
     private init() { }

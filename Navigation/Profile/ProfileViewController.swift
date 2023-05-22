@@ -37,11 +37,11 @@ class ProfileViewController: UIViewController {
         
         navigationItem.hidesBackButton = true
         
-        #if DEBUG
-        view.backgroundColor = .blue
-        #else
-        view.backgroundColor = .red
-        #endif
+//        #if DEBUG
+//        view.backgroundColor = .blue
+//        #else
+//        view.backgroundColor = .red
+//        #endif
         
         postsTable.delegate = self
         postsTable.dataSource = self

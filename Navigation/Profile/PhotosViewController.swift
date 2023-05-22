@@ -1,13 +1,10 @@
-//
-//  PhotosViewController.swift
-//  Navigation
-//
-//  Created by STANISLAV MAYBORODA on 4/17/23.
-//
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+    var galleryImages: [UIImage] = []
+    let photosFacade = ImagePublisherFacade()
     
     lazy var photoCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,10 +20,11 @@ class PhotosViewController: UIViewController {
         return view
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        photosFacade.subscribe(self)
+        photosFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,30 +44,46 @@ class PhotosViewController: UIViewController {
             photoCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
 }
 
 extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Photo.photos.count
+        return galleryImages.count
+        //return Photo.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.reuseIdentifier, for: indexPath) as? PhotosCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureUI(for: Photo.photos[indexPath.row])
+        // cell.configureUI(for: Photo.photos[indexPath.row])
+        
+        cell.configureUI(for: galleryImages[indexPath.row])
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
         let width = (view.frame.width - 32) / 3
         let height = width
         return CGSize(width: Double(width), height: Double(height))
     }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        galleryImages.append(images.last!)
+        photoCollectionView.reloadData()
+        //photoCollectionView.reloadData()
+    }
     
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        photosFacade.removeSubscription(for: self)
+        photosFacade.rechargeImageLibrary()
+    }
     
 }
+
+

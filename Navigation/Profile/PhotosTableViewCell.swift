@@ -85,7 +85,7 @@ extension PhotosTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
         
-        cell.configureUI(for: Photo.photos[indexPath.row])
+        cell.configureUI(for: UIImage(named: Photo.photos[indexPath.row].name)!)
         return cell
         }
     
