@@ -27,8 +27,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     firstViewController.delegate = MyLoginFactory.makeLoginInspector()
                 }
             }
-    
         
+        UITabBar.appearance().backgroundColor = UIColor(red: 53.0, green: 144.0, blue: 243.0, alpha: 0.6)
+    
+
         window.makeKeyAndVisible()
         
      

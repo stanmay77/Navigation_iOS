@@ -12,64 +12,104 @@ class FeedViewController: UIViewController {
 
     var firstPost = Post(title: "Hello world!", author: "", description: "", image: "", likes: 0, views: 0)
     
-    lazy var postButtonOne: UIButton = {
-        var button = UIButton()
-        button.setTitle("New Post", for: .normal)
-        button.backgroundColor = .systemIndigo
-        button.layer.cornerRadius = 12
-        button.layer.borderColor = UIColor.yellow.cgColor
-        button.frame = CGRect(x: 0, y: 0, width: 220, height: 45)
-        button.addTarget(self, action: #selector(getNewPost), for: .touchUpInside)
-        return button
+    lazy var inputField: UITextField = {
+        let tField = UITextField(frame: .zero)
+        tField.text = "Insert secret word"
+        tField.placeholder = "Email or user name"
+        tField.setLeftPaddingPoints(10)
+        tField.textColor = .black
+        tField.font = UIFont.systemFont(ofSize: 16)
+        tField.layer.cornerRadius = 10
+        tField.autocapitalizationType = .none
+        tField.backgroundColor = UIColor.systemGray6
+        tField.keyboardType = UIKeyboardType.default
+        tField.returnKeyType = UIReturnKeyType.done
+        tField.tintColor = UIColor(named: "AccentColor")
+        tField.translatesAutoresizingMaskIntoConstraints = false
+        return tField
     }()
     
-    lazy var postButtonTwo: UIButton = {
-        var button = UIButton()
-        button.setTitle("New Post", for: .normal)
-        button.backgroundColor = .systemIndigo
-        button.layer.cornerRadius = 12
-        button.layer.borderColor = UIColor.yellow.cgColor
-        button.frame = CGRect(x: 0, y: 0, width: 220, height: 45)
-        button.addTarget(self, action: #selector(getNewPost), for: .touchUpInside)
-        return button
+    
+    lazy var resultLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.backgroundColor = .white
+        label.layer.borderColor = UIColor.blue
+            .cgColor
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 10
+        label.text = "Check result"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    lazy var myStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.addArrangedSubview(self.postButtonOne)
-        stack.addArrangedSubview(self.postButtonTwo)
-        return stack
-    }()
+
+    lazy var checkGuessButton = CustomButton(frame: .zero, title: "Check", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10)
+    
+    
+    let feedModel: FeedModelProtocol
+    
+    init(model: FeedModelProtocol) {
+        self.feedModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Your feed"
-        view.backgroundColor = .systemBackground
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        view.addSubview(myStackView)
+        configureUI()
+        
+        checkGuessButton.tapClosure = { [unowned self] in
+            
+            if let text = inputField.text, text != ""
+            {
+                if feedModel.check(word: text) {
+                    resultLabel.text = "Correct secret word!"
+                    resultLabel.backgroundColor = .green
+                } else {
+                    resultLabel.text = "Wrong secret word!"
+                    resultLabel.backgroundColor = .red
+                }
+            }
+            
+        }
+        
+    }
+    
+    func configureUI() {
+        
+        view.addSubview(inputField)
+        view.addSubview(checkGuessButton)
+        view.addSubview(resultLabel)
+        
+        view.backgroundColor = .systemBackground
         
         NSLayoutConstraint.activate([
-            myStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            myStackView.heightAnchor.constraint(equalToConstant: view.frame.size.height/2),
-            myStackView.widthAnchor.constraint(equalToConstant: view.frame.size.width/2)
+            
+            inputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            inputField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            inputField.widthAnchor.constraint(equalToConstant: 250),
+            inputField.heightAnchor.constraint(equalToConstant: 75),
+            
+            checkGuessButton.heightAnchor.constraint(equalToConstant: 50),
+            checkGuessButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            checkGuessButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            checkGuessButton.topAnchor.constraint(equalTo: inputField.bottomAnchor, constant: 50),
+            
+            resultLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            resultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            resultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            resultLabel.heightAnchor.constraint(equalToConstant: 30)
+           
         ])
-        
     }
     
-    
-    @objc func getNewPost() {
-        let postVC = PostViewController()
-        postVC.title = firstPost.title
-        self.show(postVC,sender: self)
-    }
-
 }

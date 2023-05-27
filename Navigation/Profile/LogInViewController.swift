@@ -19,22 +19,10 @@ class LogInViewController: UIViewController {
         image.image = UIImage(named: "logo")
         return image
     }()
+
     
-    lazy var logInButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setBackgroundImage(UIImage(named:"blue_pixel"), for: .normal)
-        button.setBackgroundImage(UIImage(named:"blue_pixel")?.image(alpha: 0.8), for: .selected)
-        button.setBackgroundImage(UIImage(named:"blue_pixel")?.image(alpha: 0.8), for: .highlighted)
-        button.setBackgroundImage(UIImage(named:"blue_pixel")?.image(alpha: 0.8), for: .disabled)
-        button.imageView?.layer.cornerRadius = 10
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(goToProfile), for: .touchUpInside)
-        return button
-    }()
+    lazy var logInButton = CustomButton(frame: .zero, title: "Log In", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10)
+    
     
     lazy var stackView: UIStackView = {
         let stack = UIStackView(frame: .zero)
@@ -162,6 +150,31 @@ class LogInViewController: UIViewController {
         scrollContentView.addSubview(logInButton)
         scrollContentView.addSubview(separatorView)
         
+        logInButton.tapClosure = { [unowned self] in
+        #if DEBUG
+            currentUserService = TestUserService()
+        #else
+            currentUserService = CurrentUserService()
+        #endif
+            
+            let loginEntered = logInTextField.text ?? ""
+            let passwordEntered = passwordTextField.text ?? ""
+            let loginConfirmed = delegate?.check(loginEntered, passwordEntered) ?? false
+            let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
+            
+            if loginConfirmed && checkedUser != nil {
+                let pvc = ProfileViewController()
+                navigationController?.navigationBar.isHidden = false
+                show(pvc, sender: self)
+                pvc.userLogged = checkedUser
+            } else {
+                let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .default)
+                alertVC.addAction(alertAction)
+                present(alertVC, animated: true)
+            }
+        }
+        
         NSLayoutConstraint.activate([
             logInScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             logInScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -201,32 +214,6 @@ class LogInViewController: UIViewController {
         
     }
 
-    @objc func goToProfile() {
-        
-        
-        #if DEBUG
-        currentUserService = TestUserService()
-        #else
-        currentUserService = CurrentUserService()
-        #endif
-        
-        let loginEntered = logInTextField.text ?? ""
-        let passwordEntered = passwordTextField.text ?? ""
-        let loginConfirmed = delegate?.check(loginEntered, passwordEntered) ?? false
-        let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
-        
-        if loginConfirmed && checkedUser != nil {
-            let pvc = ProfileViewController()
-            navigationController?.navigationBar.isHidden = false
-            self.show(pvc, sender: self)
-            pvc.userLogged = checkedUser
-        } else {
-            let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default)
-            alertVC.addAction(alertAction)
-            present(alertVC, animated: true)
-        }
-    }
     
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
