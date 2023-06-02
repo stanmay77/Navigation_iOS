@@ -2,27 +2,21 @@ import UIKit
 
 final class CustomButton: UIButton {
     
+    typealias Action = (()->Void)
+    
     var buttonTitle: String = ""
     var titleColor: UIColor? = nil
     var bgImage: UIImage? = nil
     var cornerRadius: Float = 0
+    var tapClosure: Action
     
-    var tapClosure: (() -> Void)?
-    
-    init(frame: CGRect, title: String, titleColor: UIColor, bgImage: UIImage?, cornerRadius: Float) {
+    init(frame: CGRect, title: String, titleColor: UIColor, bgImage: UIImage?, cornerRadius: Float, action: @escaping Action) {
+        tapClosure = action
         self.buttonTitle = title
         self.titleColor = titleColor
         self.bgImage = bgImage
         self.cornerRadius = cornerRadius
         super.init(frame: frame)
-        configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureUI() {
         self.setTitle(buttonTitle, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
         
@@ -37,11 +31,16 @@ final class CustomButton: UIButton {
         self.layer.cornerRadius = CGFloat(cornerRadius)
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addTarget(self, action: #selector(tapOnButton), for: .touchUpInside)
+        addTarget(self, action: #selector(tapOnButton), for: .touchUpInside)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func tapOnButton() {
-        tapClosure?()
+        tapClosure()
     }
     
 }

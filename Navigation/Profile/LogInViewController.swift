@@ -20,8 +20,39 @@ class LogInViewController: UIViewController {
         return image
     }()
 
+
     
-    lazy var logInButton = CustomButton(frame: .zero, title: "Log In", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10)
+    lazy var logInButton = CustomButton(frame: .zero, title: "Log In", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10) {
+        [unowned self] in
+    #if DEBUG
+        currentUserService = TestUserService()
+        
+    #else
+        currentUserService = CurrentUserService()
+    #endif
+        
+        let loginEntered = logInTextField.text ?? ""
+        let passwordEntered = passwordTextField.text ?? ""
+        
+        let loginConfirmed = delegate?.check(loginEntered, passwordEntered) ?? false
+        let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
+       
+        if loginConfirmed && checkedUser != nil {
+            let pvc = ProfileViewController()
+            navigationController?.navigationBar.isHidden = false
+            show(pvc, sender: self)
+            pvc.userLogged = checkedUser!.login
+            print(loginConfirmed)
+        } else {
+            let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default)
+            alertVC.addAction(alertAction)
+            present(alertVC, animated: true)
+            print("Incorrect login")
+        }
+        
+        
+    }
     
     
     lazy var stackView: UIStackView = {
@@ -149,31 +180,6 @@ class LogInViewController: UIViewController {
         scrollContentView.addSubview(stackView)
         scrollContentView.addSubview(logInButton)
         scrollContentView.addSubview(separatorView)
-        
-        logInButton.tapClosure = { [unowned self] in
-        #if DEBUG
-            currentUserService = TestUserService()
-        #else
-            currentUserService = CurrentUserService()
-        #endif
-            
-            let loginEntered = logInTextField.text ?? ""
-            let passwordEntered = passwordTextField.text ?? ""
-            let loginConfirmed = delegate?.check(loginEntered, passwordEntered) ?? false
-            let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
-            
-            if loginConfirmed && checkedUser != nil {
-                let pvc = ProfileViewController()
-                navigationController?.navigationBar.isHidden = false
-                show(pvc, sender: self)
-                pvc.userLogged = checkedUser
-            } else {
-                let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK", style: .default)
-                alertVC.addAction(alertAction)
-                present(alertVC, animated: true)
-            }
-        }
         
         NSLayoutConstraint.activate([
             logInScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

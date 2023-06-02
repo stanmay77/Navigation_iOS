@@ -13,7 +13,7 @@ final class Checker {
     private init() { }
     
     func check(_ login: String, _ password: String) -> Bool {
-        if login == login && password == password {
+        if login == self.login && password == self.password {
             return true
         } else
         {

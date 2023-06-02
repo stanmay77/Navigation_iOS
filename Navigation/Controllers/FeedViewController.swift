@@ -44,7 +44,21 @@ class FeedViewController: UIViewController {
     }()
     
 
-    lazy var checkGuessButton = CustomButton(frame: .zero, title: "Check", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10)
+    lazy var checkGuessButton = CustomButton(frame: .zero, title: "Check", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10) { [unowned self] in
+        
+        if let text = inputField.text, text != ""
+                    {
+                        if feedModel.check(word: text) {
+                            resultLabel.text = "Correct secret word!"
+                            resultLabel.backgroundColor = .green
+                        } else {
+                            resultLabel.text = "Wrong secret word!"
+                            resultLabel.backgroundColor = .red
+                        }
+                    }
+        
+        }
+        
     
     
     let feedModel: FeedModelProtocol
@@ -66,22 +80,6 @@ class FeedViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         configureUI()
-        
-        checkGuessButton.tapClosure = { [unowned self] in
-            
-            if let text = inputField.text, text != ""
-            {
-                if feedModel.check(word: text) {
-                    resultLabel.text = "Correct secret word!"
-                    resultLabel.backgroundColor = .green
-                } else {
-                    resultLabel.text = "Wrong secret word!"
-                    resultLabel.backgroundColor = .red
-                }
-            }
-            
-        }
-        
     }
     
     func configureUI() {

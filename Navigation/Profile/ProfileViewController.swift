@@ -10,7 +10,19 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    var userLogged: User? = nil
+    var userLogged: String?
+    var viewModel: ProfileViewModelProtocol
+    var profileVC: ProfileHeaderView? = nil
+
+    init() {
+        self.viewModel = ProfileViewModel()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     let postsTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -22,10 +34,22 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        title = "Profile"
+        
+        if userLogged != nil {
+            viewModel.updateState(input: .userProcessed(userLogged!)) {[unowned self] user in
+                if let user = user {
+                    profileVC = ProfileHeaderView()
+                    profileVC?.fullNameLabel.text = user.fullName
+                    profileVC?.avatarImageView.image = user.avatar
+                    profileVC?.statusLabel.text = user.status
+                }
+            }
+        }
+        
         configureUI()
     }
     
@@ -33,9 +57,12 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    
     func configureUI() {
         
         navigationItem.hidesBackButton = true
+        view.backgroundColor = .lightGray
+        title = "Profile"
         
 //        #if DEBUG
 //        view.backgroundColor = .blue
@@ -57,8 +84,7 @@ class ProfileViewController: UIViewController {
             ])
         
         
-    }
-        
+        }
     }
     
 
@@ -70,7 +96,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             return Post.posts.count
-            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,10 +115,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0
         {
-            let profileVC = ProfileHeaderView()
-            profileVC.fullNameLabel.text = userLogged?.fullName ?? "No Name"
-            profileVC.avatarImageView.image = userLogged?.avatar ?? UIImage(named: "cat")
-            profileVC.statusLabel.text = userLogged?.status ?? "No status provided"
+//            let profileVC = ProfileHeaderView()
+//            profileVC.fullNameLabel.text = userLogged?.fullName ?? "No Name"
+//            profileVC.avatarImageView.image = userLogged?.avatar ?? UIImage(named: "cat")
+//            profileVC.statusLabel.text = userLogged?.status ?? "No status provided"
             return profileVC
         }
         else
@@ -134,5 +160,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
     }
+    
+    
+    func bindViewModel() {
+        if self.userLogged != nil {
+            
+            
+        }
+    }
+    
+    
 }
 

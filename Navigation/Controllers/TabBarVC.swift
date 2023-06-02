@@ -15,7 +15,6 @@ class TabBarVC: UITabBarController {
 
     }
     
-    
     func setupUI() {
         let feedModel = FeedModel()
         let feedNavVC = UINavigationController(rootViewController: FeedViewController(model: feedModel))
