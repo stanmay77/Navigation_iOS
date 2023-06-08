@@ -15,8 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = TabBarVC()
-        self.window = window
+        
+        let appFactory = AppFactory()
+        let rootCoordinator = RootCoordinator(appFactory: appFactory)
+        window.rootViewController = rootCoordinator.start()
         
         guard let tabVC = window.rootViewController as? UITabBarController else {
               return
@@ -29,8 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         
         UITabBar.appearance().backgroundColor = UIColor(red: 53.0, green: 144.0, blue: 243.0, alpha: 0.6)
-    
-
+        
+        self.window = window
         window.makeKeyAndVisible()
         
      
