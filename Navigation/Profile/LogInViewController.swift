@@ -50,8 +50,6 @@ class LogInViewController: UIViewController {
             present(alertVC, animated: true)
             print("Incorrect login")
         }
-        
-        
     }
     
     
