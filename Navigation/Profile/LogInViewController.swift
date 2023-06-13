@@ -10,9 +10,9 @@ import UIKit
 class LogInViewController: UIViewController {
     
     var currentUserService: UserService? = nil
-    
     var delegate: LoginViewControllerDelegate?
-    
+    var viewModel: LoginViewModelProtocol
+   
     var logoImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,15 @@ class LogInViewController: UIViewController {
         return image
     }()
 
-
+    init(viewModel: LoginViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var logInButton = CustomButton(frame: .zero, title: "Log In", titleColor: .white, bgImage: UIImage(named:"blue_pixel"), cornerRadius: 10) {
         [unowned self] in
@@ -38,18 +46,25 @@ class LogInViewController: UIViewController {
         let checkedUser = currentUserService?.getUserByLogin(for: loginEntered)
        
         if loginConfirmed && checkedUser != nil {
-            let pvc = ProfileViewController()
-            navigationController?.navigationBar.isHidden = false
-            show(pvc, sender: self)
-            pvc.userLogged = checkedUser!.login
-            print(loginConfirmed)
+            viewModel.updateState(input: .correctLogInfo(checkedUser!))
+
+//            let pvc = ProfileViewController()
+//            navigationController?.navigationBar.isHidden = false
+//            show(pvc, sender: self)
+//            pvc.userLogged = checkedUser!.login
+//            print(loginConfirmed)
         } else {
-            let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default)
-            alertVC.addAction(alertAction)
-            present(alertVC, animated: true)
-            print("Incorrect login")
+            
+            viewModel.updateState(input: .incorrectLogInfo)
+            
+//            let alertVC = UIAlertController(title: "Error", message: "User \(logInTextField.text ?? "") not registered or wrong password entered!", preferredStyle: .alert)
+//            let alertAction = UIAlertAction(title: "OK", style: .default)
+//            alertVC.addAction(alertAction)
+//            present(alertVC, animated: true)
+//            print("Incorrect login")
         }
+        
+        
     }
     
     

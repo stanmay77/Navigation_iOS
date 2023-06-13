@@ -10,12 +10,13 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    var userLogged: String?
-    var viewModel: ProfileViewModelProtocol
+    var userLogged: User?
     var profileVC: ProfileHeaderView? = nil
-
-    init() {
-        self.viewModel = ProfileViewModel()
+    
+    
+    
+    init(userLogged: User) {
+        self.userLogged = userLogged
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,14 +40,10 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         if userLogged != nil {
-            viewModel.updateState(input: .userProcessed(userLogged!)) {[unowned self] user in
-                if let user = user {
                     profileVC = ProfileHeaderView()
-                    profileVC?.fullNameLabel.text = user.fullName
-                    profileVC?.avatarImageView.image = user.avatar
-                    profileVC?.statusLabel.text = user.status
-                }
-            }
+                    profileVC?.fullNameLabel.text = userLogged!.fullName
+                    profileVC?.avatarImageView.image = userLogged!.avatar
+                    profileVC?.statusLabel.text = userLogged!.status
         }
         
         configureUI()

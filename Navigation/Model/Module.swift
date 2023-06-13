@@ -8,6 +8,10 @@
 import UIKit
 
 
+protocol ViewModel: AnyObject {
+    
+}
+
 
 struct Module {
     
@@ -17,6 +21,7 @@ struct Module {
     }
     
     let moduleType: ModuleType
+    let viewModel: ViewModel?
     let view: UIViewController
 }
 
@@ -29,6 +34,7 @@ extension Module.ModuleType {
             
         case .login:
             return UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 0)
+        
         }
     }
 }

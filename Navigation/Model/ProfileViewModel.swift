@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProfileViewModelProtocol {
+protocol ProfileViewModelProtocol: ViewModel {
     var onStateChanged: ((ProfileViewModel.State) -> Void)? {get set}
     func updateState(input: ProfileViewModel.Input, closure: @escaping (User?)->())
 }

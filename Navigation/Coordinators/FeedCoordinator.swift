@@ -5,6 +5,7 @@ final class FeedCoordinator: ModuleCoordinatable {
     var module: Module?
     var moduleType: Module.ModuleType
     private let appFactory: AppFactory
+    weak var coordinator: RootCoordinator?
     
     private(set) var childCoordinators: [Coordinatable] = []
 

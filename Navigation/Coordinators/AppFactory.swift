@@ -7,11 +7,12 @@ final class AppFactory {
         case .feed:
             let feedModel = FeedModel()
             let view = UINavigationController(rootViewController: FeedViewController(model: feedModel))
-            return Module(moduleType: .feed, view: view)
+            return Module(moduleType: .feed, viewModel: nil, view: view)
             
         case .login:
-            let view = UINavigationController(rootViewController: LogInViewController())
-            return Module(moduleType: .login, view: view)
+            let viewModel = LoginViewModel()
+            let view = UINavigationController(rootViewController: LogInViewController(viewModel: viewModel))
+            return Module(moduleType: .login, viewModel: viewModel, view: view)
         }
     }
     

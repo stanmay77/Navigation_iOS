@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var rootCoordinator: RootCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -18,6 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appFactory = AppFactory()
         let rootCoordinator = RootCoordinator(appFactory: appFactory)
+        self.rootCoordinator = rootCoordinator
+        
         window.rootViewController = rootCoordinator.start()
         
         guard let tabVC = window.rootViewController as? UITabBarController else {
