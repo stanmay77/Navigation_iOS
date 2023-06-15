@@ -13,4 +13,5 @@ struct Photo {
         Photo(name: "xs"),
         Photo(name: "xs")
     ]
+
 }

@@ -1,10 +1,25 @@
 
 import UIKit
 import iOSIntPackage
+import Foundation
 
 class PhotosViewController: UIViewController {
-    var galleryImages: [UIImage] = []
-    let photosFacade = ImagePublisherFacade()
+    
+    var imageGallery: [UIImage] = [         UIImage(named: "se1")!,
+                                            UIImage(named: "se1")!,
+                                            UIImage(named: "xs")!,
+                                            UIImage(named: "xs")!,
+                                            UIImage(named: "xs")!,
+                                            UIImage(named: "se1")!,
+                                            UIImage(named: "se1")!,
+                                            UIImage(named: "xs")!,
+                                            UIImage(named: "xs")!,
+                                            UIImage(named: "xs")!]
+    
+    var filteredImagesGallery: [UIImage?] = []
+    
+    
+ //   let photosFacade = ImagePublisherFacade()
     
     lazy var photoCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,8 +38,34 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        photosFacade.subscribe(self)
-        photosFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: nil)
+        prepareLargeGallery()
+        getFilteredImages()
+        
+       // photosFacade.subscribe(self)
+       // photosFacade.addImagesWithTimer(time: 1, repeat: 20, userImages: nil)
+        
+
+    }
+    
+    func getFilteredImages() {
+        NSLog("Started image processing")
+        ImageProcessor().processImagesOnThread(sourceImages: imageGallery, filter: .crystallize(radius: 110.0), qos: .userInteractive) { images in
+                DispatchQueue.main.async {
+                for image in images {
+                    self.filteredImagesGallery.append(UIImage(cgImage: image!))
+                }
+                self.photoCollectionView.reloadData()
+                NSLog("Finished image processing")
+            }
+        }
+        }
+    
+    func prepareLargeGallery() {
+        var i = 0
+        while i < 3 {
+            imageGallery.append(contentsOf: imageGallery)
+            i+=1
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,13 +84,16 @@ class PhotosViewController: UIViewController {
             photoCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             photoCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+  
     }
+    
 }
 
 extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return galleryImages.count
+        return filteredImagesGallery.count
         //return Photo.photos.count
     }
     
@@ -59,7 +103,10 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDelega
         }
         // cell.configureUI(for: Photo.photos[indexPath.row])
         
-        cell.configureUI(for: galleryImages[indexPath.row])
+
+        cell.configureUI(for: filteredImagesGallery[indexPath.row]!)
+       
+
         return cell
     }
     
@@ -71,19 +118,18 @@ extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDelega
     }
 }
 
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        galleryImages.append(images.last!)
-        photoCollectionView.reloadData()
-        //photoCollectionView.reloadData()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        photosFacade.removeSubscription(for: self)
-        photosFacade.rechargeImageLibrary()
-    }
-    
-}
+//extension PhotosViewController: ImageLibrarySubscriber {
+//    func receive(images: [UIImage]) {
+//        galleryImages.append(images.last!)
+//        photoCollectionView.reloadData()
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        photosFacade.removeSubscription(for: self)
+//        photosFacade.rechargeImageLibrary()
+//    }
+//    
+//}
 
 
