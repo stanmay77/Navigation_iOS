@@ -19,6 +19,7 @@
 		3324CC6229D8544A00B10223 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324CC6129D8544A00B10223 /* LogInViewController.swift */; };
 		332C9CD82A24FEEE00D19D13 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C9CD72A24FEEE00D19D13 /* ProfileViewModel.swift */; };
 		332D7F022A1663D400F40F20 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 332D7F012A1663D400F40F20 /* iOSIntPackage */; };
+		332F64EB2A3B46AE00A82783 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F64EA2A3B46AE00A82783 /* NetworkManager.swift */; };
 		333326242A0B8D1B00D03258 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333326232A0B8D1B00D03258 /* LoginInspector.swift */; };
 		3336B9B029DF069F00C705CF /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336B9AF29DF069F00C705CF /* PostTableViewCell.swift */; };
 		333CAF212A1BEB1000D0EF5D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CAF202A1BEB1000D0EF5D /* CustomButton.swift */; };
@@ -87,6 +88,7 @@
 		3323942E2A374D9400A4A94A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3324CC6129D8544A00B10223 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		332C9CD72A24FEEE00D19D13 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		332F64EA2A3B46AE00A82783 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		333326232A0B8D1B00D03258 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		3336B9AF29DF069F00C705CF /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		333CAF202A1BEB1000D0EF5D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		330373CB29B3BD7F00C65FA4 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				332F64E92A3B469F00A82783 /* Managers */,
 				335DD3AB2A3216FE00CFD5E8 /* Coordinators */,
 				336E7A8A29BA2E1900A61E27 /* Profile */,
 				33DCF28029B75CF100E8A280 /* Model */,
@@ -182,6 +185,14 @@
 				335DD3B62A32435400CFD5E8 /* AppTabBarController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		332F64E92A3B469F00A82783 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				332F64EA2A3B46AE00A82783 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		335DD3AB2A3216FE00CFD5E8 /* Coordinators */ = {
@@ -394,6 +405,7 @@
 				3323942F2A374D9400A4A94A /* LoginViewModel.swift in Sources */,
 				33B0799829C0E90C00C1D22E /* Extensions.swift in Sources */,
 				335C0B4029ED5B5F004E3FBA /* Photo.swift in Sources */,
+				332F64EB2A3B46AE00A82783 /* NetworkManager.swift in Sources */,
 				33473B2A29E725BF000A5D89 /* PhotosCollectionViewCell.swift in Sources */,
 				3364052229E59402001BF0D4 /* PhotosTableViewCell.swift in Sources */,
 				33DCF28429B761B500E8A280 /* InfoViewController.swift in Sources */,
