@@ -34,11 +34,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         UITabBar.appearance().backgroundColor = UIColor(red: 53.0, green: 144.0, blue: 243.0, alpha: 0.6)
         
-        let appConfig = NetworkManager.AppConfiguration.planets
-        NetworkManager.request(for: appConfig)
+//        let url = NetworkManager.AppConfiguration.planets.getURL
+//        NetworkManager.request(for: url)
         self.window = window
         window.makeKeyAndVisible()
-        
+
      
                 
     }

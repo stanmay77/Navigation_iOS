@@ -12,7 +12,7 @@
 		330373CF29B3BD7F00C65FA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373CE29B3BD7F00C65FA4 /* SceneDelegate.swift */; };
 		330373D629B3BD8000C65FA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330373D529B3BD8000C65FA4 /* Assets.xcassets */; };
 		330373D929B3BD8000C65FA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330373D729B3BD8000C65FA4 /* LaunchScreen.storyboard */; };
-		330373E429B3C78000C65FA4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373E329B3C78000C65FA4 /* FeedViewController.swift */; };
+		330373E429B3C78000C65FA4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373E329B3C78000C65FA4 /* InfoViewController.swift */; };
 		330373E829B3C7A800C65FA4 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330373E729B3C7A800C65FA4 /* PostViewController.swift */; };
 		3304C5E92A0A2B2500D0E71F /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304C5E82A0A2B2500D0E71F /* Checker.swift */; };
 		3323942F2A374D9400A4A94A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3323942E2A374D9400A4A94A /* LoginViewModel.swift */; };
@@ -47,7 +47,7 @@
 		33AF925729F422FF006FDDB1 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DCF28129B75CFA00E8A280 /* Post.swift */; };
 		33B0799629C0D57100C1D22E /* cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33B0799529C0D57100C1D22E /* cat.jpg */; };
 		33B0799829C0E90C00C1D22E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0799729C0E90C00C1D22E /* Extensions.swift */; };
-		33DCF28429B761B500E8A280 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DCF28329B761B500E8A280 /* InfoViewController.swift */; };
+		33DCF28429B761B500E8A280 /* InfoViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DCF28329B761B500E8A280 /* InfoViewController1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +82,7 @@
 		330373D529B3BD8000C65FA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		330373D829B3BD8000C65FA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		330373DA29B3BD8000C65FA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		330373E329B3C78000C65FA4 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		330373E329B3C78000C65FA4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		330373E729B3C7A800C65FA4 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		3304C5E82A0A2B2500D0E71F /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		3323942E2A374D9400A4A94A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		33B0799529C0D57100C1D22E /* cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat.jpg; sourceTree = "<group>"; };
 		33B0799729C0E90C00C1D22E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		33DCF28129B75CFA00E8A280 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		33DCF28329B761B500E8A280 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		33DCF28329B761B500E8A280 /* InfoViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,9 +179,9 @@
 		330373E029B3C6D800C65FA4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				330373E329B3C78000C65FA4 /* FeedViewController.swift */,
+				330373E329B3C78000C65FA4 /* InfoViewController.swift */,
 				330373E729B3C7A800C65FA4 /* PostViewController.swift */,
-				33DCF28329B761B500E8A280 /* InfoViewController.swift */,
+				33DCF28329B761B500E8A280 /* InfoViewController1.swift */,
 				335DD3B62A32435400CFD5E8 /* AppTabBarController.swift */,
 			);
 			path = Controllers;
@@ -400,7 +400,7 @@
 				333326242A0B8D1B00D03258 /* LoginInspector.swift in Sources */,
 				335DD3AF2A32174600CFD5E8 /* RootCoordinator.swift in Sources */,
 				336838A32A14D006001D1F34 /* LoginFactory.swift in Sources */,
-				330373E429B3C78000C65FA4 /* FeedViewController.swift in Sources */,
+				330373E429B3C78000C65FA4 /* InfoViewController.swift in Sources */,
 				336E7A8C29BA2E2800A61E27 /* ProfileHeaderView.swift in Sources */,
 				3323942F2A374D9400A4A94A /* LoginViewModel.swift in Sources */,
 				33B0799829C0E90C00C1D22E /* Extensions.swift in Sources */,
@@ -408,7 +408,7 @@
 				332F64EB2A3B46AE00A82783 /* NetworkManager.swift in Sources */,
 				33473B2A29E725BF000A5D89 /* PhotosCollectionViewCell.swift in Sources */,
 				3364052229E59402001BF0D4 /* PhotosTableViewCell.swift in Sources */,
-				33DCF28429B761B500E8A280 /* InfoViewController.swift in Sources */,
+				33DCF28429B761B500E8A280 /* InfoViewController1.swift in Sources */,
 				3342EB442A042C4700ED7BE3 /* User.swift in Sources */,
 				335DD3B12A322AC600CFD5E8 /* AppFactory.swift in Sources */,
 				333CAF212A1BEB1000D0EF5D /* CustomButton.swift in Sources */,
